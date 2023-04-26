@@ -1,6 +1,22 @@
 import { useState } from "react";
-import hangman from "./assets/hangman.svg";
 import "./App.css";
+import zero from "./assets/0.svg";
+import one from "./assets/1.svg";
+import two from "./assets/2.svg";
+import three from "./assets/3.svg";
+import four from "./assets/4.svg";
+import five from "./assets/5.svg";
+import six from "./assets/6.svg";
+
+const imagesHash = {
+  0: zero,
+  1: one,
+  2: two,
+  3: three,
+  4: four,
+  5: five,
+  6: six,
+};
 
 function App() {
   const [guessed, setGuessed] = useState([]);
@@ -16,10 +32,14 @@ function App() {
           marginBottom: "50px",
         }}
       >
-        <h1>Hangman</h1>
+        <h2>Hangman</h2>
       </div>
-      <div>
-        <img src={hangman} width={200} />
+      <div
+        style={{
+          width: "500px",
+        }}
+      >
+        <img src={imagesHash[wrongs]} width="200px" />
       </div>
       <div
         style={{
@@ -28,9 +48,10 @@ function App() {
           alignItems: "center",
         }}
       >
-        {word.split("").map((letter) => {
+        {word.split("").map((letter, i) => {
           return (
             <div
+              key={i}
               style={{
                 border: "1px solid white",
                 textAlign: "center",
@@ -68,7 +89,7 @@ function App() {
             if (word.includes(evt.target.value)) {
               console.log("correct");
             } else {
-              console.log("incorrect");
+              setWrongs((wrongs) => wrongs + 1);
             }
             setInput("");
           }}

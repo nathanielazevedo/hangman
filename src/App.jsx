@@ -32,7 +32,7 @@ function App() {
           marginBottom: "50px",
         }}
       >
-        <h2>Hangman</h2>
+        <h1>Hangman</h1>
       </div>
       <div
         style={{
@@ -94,6 +94,45 @@ function App() {
             setInput("");
           }}
         />
+      </div>
+      <div>
+        <h3>Guessed Letters</h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "500px",
+            height: "100px",
+            border: "1px solid white",
+            flexWrap: "wrap",
+          }}
+        >
+          {guessed.map((letter, i) => {
+            return (
+              <div
+                key={i}
+                style={{
+                  textAlign: "center",
+                  width: "50px",
+                  height: "50px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: "5px",
+                }}
+              >
+                <h5
+                  style={{
+                    color: "white",
+                  }}
+                >
+                  {letter}
+                </h5>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

@@ -22,6 +22,7 @@ function App() {
   const [guessed, setGuessed] = useState([]);
   const [input, setInput] = useState("");
   const [wrongs, setWrongs] = useState(0);
+  const [helperText, setHelperText] = useState("");
   const word = "hello";
 
   return (
@@ -85,15 +86,24 @@ function App() {
           value={input}
           onChange={(evt) => {
             setInput(evt.target.value);
-            setGuessed((guessed) => [...guessed, evt.target.value]);
             if (word.includes(evt.target.value)) {
-              console.log("correct");
+              setHelperText("Correct!");
+              setGuessed((guessed) => [...guessed, evt.target.value]);
             } else {
-              setWrongs((wrongs) => wrongs + 1);
+              if (wrongs === 6) {
+                setHelperText("You lost!");
+              } else if (guessed.includes(evt.target.value)) {
+                setHelperText("You already guessed that!");
+              } else {
+                setGuessed((guessed) => [...guessed, evt.target.value]);
+                setHelperText("Wrong!");
+                setWrongs((wrongs) => wrongs + 1);
+              }
             }
             setInput("");
           }}
         />
+        <div>{helperText}</div>
       </div>
       <div>
         <h3>Guessed Letters</h3>

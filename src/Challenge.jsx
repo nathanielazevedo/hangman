@@ -6,6 +6,7 @@ import CryptoJS from "crypto-js";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import CheckIcon from "@mui/icons-material/Check";
+import chalkboard from "./assets/chalkboard.jpeg";
 
 const Challenge = () => {
   const [text, setText] = useState("");
@@ -26,21 +27,24 @@ const Challenge = () => {
         alignItems: "center",
         height: "100vh",
         justifyContent: "center",
+        backgroundImage: `url(${chalkboard})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
       }}
     >
       <Link to="/">
         <Button
           variant="contained"
           sx={{
-            color: "white",
-            fontSize: "2rem",
-            fontWeight: "bold",
             position: "absolute",
-            top: "1rem",
-            left: "1rem",
+            top: "30px",
+            left: "30px",
+            zIndex: "1",
+            fontFamily: "Coming Soon, cursive",
+            fontSize: "30px",
           }}
         >
-          <Typography>Home</Typography>
+          Home
         </Button>
       </Link>
       <Box
@@ -56,6 +60,7 @@ const Challenge = () => {
           sx={{
             color: "black",
             marginBottom: "30px",
+            fontFamily: "Coming Soon, cursive",
           }}
         >
           Send a link to Challenge a Friend
@@ -72,6 +77,13 @@ const Challenge = () => {
             sx={{
               color: "black",
               width: "80%",
+              fontFamily: "Coming Soon, cursive",
+              "& .MuiInputBase-input": {
+                fontFamily: "Coming Soon, cursive",
+              },
+              "& .MuiInputLabel-root": {
+                fontFamily: "Coming Soon, cursive",
+              },
             }}
             label="Custom Word"
             value={text}
@@ -87,6 +99,8 @@ const Challenge = () => {
             color={copied ? "success" : "primary"}
             sx={{
               height: "50px",
+              fontFamily: "Coming Soon, cursive",
+              fontSize: "20px",
             }}
             onClick={() => {
               if (copied) return;
@@ -105,6 +119,7 @@ const Challenge = () => {
             color: "black",
             marginTop: "20px",
             fontStyle: "italic",
+            fontFamily: "Coming Soon, cursive",
           }}
         >
           {link}

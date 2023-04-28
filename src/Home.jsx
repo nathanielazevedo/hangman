@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import PlayDialog from "./PlayDialog";
+import chalkboard from "./assets/chalkboard.jpeg";
 
 const Home = () => {
   const [playDialogOpen, setPlayDialogOpen] = useState(false);
@@ -13,6 +14,10 @@ const Home = () => {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
+        backgroundImage: `url(${chalkboard})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Box
@@ -21,13 +26,18 @@ const Home = () => {
           flexDirection: "column",
           justifyContent: "center",
           gap: "20px",
+          backgroundColor: "white",
+          padding: "70px",
+          borderRadius: "10px",
         }}
       >
         <Typography
           variant="h2"
           sx={{
             fontWeight: "bold",
-            marginBottom: "50px",
+            marginBottom: "30px",
+            color: "black",
+            fontFamily: "Coming Soon, cursive",
           }}
         >
           Hangman
@@ -39,6 +49,8 @@ const Home = () => {
           sx={{
             width: "100%",
             height: "50px",
+            fontFamily: "Coming Soon, cursive",
+            fontSize: "20px",
           }}
         >
           Play
@@ -51,6 +63,8 @@ const Home = () => {
             sx={{
               width: "100%",
               height: "50px",
+              fontFamily: "Coming Soon, cursive",
+              fontSize: "20px",
             }}
           >
             Challenge a Friend
@@ -63,6 +77,8 @@ const Home = () => {
             sx={{
               width: "100%",
               height: "50px",
+              fontFamily: "Coming Soon, cursive",
+              fontSize: "20px",
             }}
           >
             Leaderboard

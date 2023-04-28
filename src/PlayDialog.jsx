@@ -9,12 +9,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { categories } from "./wordBank";
 
-const difficulties = ["Easy", "Medium", "Hard"];
-
 // eslint-disable-next-line react/prop-types
 const PlayDialog = ({ open, setOpen }) => {
   const [category, setCategory] = React.useState("");
-  const [difficulty, setDifficulty] = React.useState("");
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
@@ -30,7 +27,15 @@ const PlayDialog = ({ open, setOpen }) => {
           width: "100%",
         }}
       >
-        <Typography variant="h3">Game Setup</Typography>
+        <Typography
+          variant="h3"
+          sx={{
+            fontFamily: "Coming Soon, cursive",
+            alignSelf: "flex-start",
+          }}
+        >
+          Game Setup
+        </Typography>
         <Box sx={{ minWidth: 120, width: "100%" }}>
           <FormControl
             fullWidth
@@ -38,13 +43,23 @@ const PlayDialog = ({ open, setOpen }) => {
               width: "100%",
             }}
           >
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <InputLabel
+              id="demo-simple-select-label"
+              sx={{
+                fontFamily: "Coming Soon, cursive",
+                fontSize: "20px",
+              }}
+            >
+              Category
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               sx={{
                 marginBottom: "20px",
                 width: "100%",
+                fontFamily: "Coming Soon, cursive",
+                fontSize: "20px",
               }}
               value={category}
               fullWidth
@@ -52,33 +67,22 @@ const PlayDialog = ({ open, setOpen }) => {
               onChange={(e) => setCategory(e.target.value)}
             >
               {categories.map((category) => (
-                <MenuItem key={category} value={category}>
-                  {category}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={difficulty}
-              label="Difficulty"
-              onChange={(e) => setDifficulty(e.target.value)}
-            >
-              {difficulties.map((category) => (
-                <MenuItem key={category} value={category}>
-                  {category}
+                <MenuItem
+                  key={category}
+                  value={category}
+                  sx={{
+                    fontFamily: "Coming Soon, cursive",
+                    fontSize: "20px",
+                  }}
+                >
+                  {category == "allWords" ? "All Words" : category}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Box>
         <Link
-          to={
-            !category || !difficulty ? "#" : `/play/${difficulty}/${category}`
-          }
+          to={!category ? "#" : `/play/${category}`}
           style={{ width: "100%" }}
         >
           <Button
@@ -87,8 +91,10 @@ const PlayDialog = ({ open, setOpen }) => {
             sx={{
               height: "50px",
               width: "100%",
+              fontFamily: "Coming Soon, cursive",
+              fontSize: "20px",
             }}
-            disabled={!category || !difficulty}
+            disabled={!category}
           >
             Play
           </Button>

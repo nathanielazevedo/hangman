@@ -3,83 +3,148 @@ import { useState } from "react";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import chalkboard from "./assets/chalkboard.jpeg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
+    toast.info("Loading Leaderboard, free servers are slow :)");
     const fetchLeaderboard = async () => {
-      const response = await fetch(
-        "https://hangman-back.onrender.com/leaderboard"
+      fetch("https://hangman-back.onrender.com/leaderboard").then(
+        async (res) => {
+          if (res.status === 200) {
+            toast.success("Leaderboard Loaded!");
+            const data = await res.json();
+            setLeaderboard(data);
+          } else {
+            toast.error("Leaderboard Failed to Load :(");
+          }
+        }
       );
-      const data = await response.json();
-      setLeaderboard(data);
     };
     fetchLeaderboard();
   }, []);
+
   return (
     <Box
       sx={{
-        color: "white",
+        backgroundImage: `url(${chalkboard})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        height: "100vh",
         justifyContent: "flex-start",
-        marginTop: "10vh",
       }}
     >
-      <Link to="/">
+      <Link
+        to="/"
+        sx={{
+          position: "absolute",
+          top: "30px",
+          left: "30px",
+          zIndex: "1",
+        }}
+      >
         <Button
           variant="contained"
           sx={{
-            color: "white",
-            fontSize: "2rem",
-            fontWeight: "bold",
             position: "absolute",
-            top: "1rem",
-            left: "1rem",
+            top: "30px",
+            left: "30px",
+            zIndex: "1",
+            fontFamily: "Coming Soon, cursive",
+            fontSize: "30px",
           }}
         >
-          <Typography>Home</Typography>
+          Home
         </Button>
       </Link>
-      <Typography
-        variant="h2"
+      <ToastContainer position="bottom-right" theme="dark" />
+      <Box
         sx={{
-          marginBottom: "5vh",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          fontFamily: "Coming Soon, cursive",
+          fontSize: "30px",
+          maxHeight: "80vh",
+          overFlow: "scroll",
+          width: "60%",
+          paddingTop: "15vh",
         }}
       >
-        Leaderboard
-      </Typography>
-      <table
-        style={{
-          width: "50%",
-        }}
-      >
-        <thead>
-          <tr>
-            <th style={{ textAlign: "left" }}>
-              <Typography variant="h6">Rank</Typography>
-            </th>
-            <th style={{ textAlign: "left" }}>
-              <Typography variant="h6">Name</Typography>
-            </th>
-            <th style={{ textAlign: "left" }}>
-              <Typography variant="h6">Score</Typography>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboard.map((entry, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{entry.name}</td>
-              <td>{entry.score}</td>
+        <Typography
+          variant="h2"
+          sx={{
+            marginBottom: "5vh",
+            fontFamily: "Coming Soon, cursive",
+            fontSize: "50px",
+            alignSelf: "flex-start",
+          }}
+        >
+          Leaderboard
+        </Typography>
+        <table
+          style={{
+            width: "100%",
+          }}
+        >
+          <thead>
+            <tr>
+              <th style={{ textAlign: "left" }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Coming Soon, cursive",
+                    fontSize: "35px",
+                  }}
+                >
+                  Rank
+                </Typography>
+              </th>
+              <th style={{ textAlign: "left" }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Coming Soon, cursive",
+                    fontSize: "35px",
+                  }}
+                >
+                  Name
+                </Typography>
+              </th>
+              <th style={{ textAlign: "left" }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "Coming Soon, cursive",
+                    fontSize: "35px",
+                  }}
+                >
+                  Score
+                </Typography>
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {leaderboard.map((entry, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{entry.name}</td>
+                <td>{entry.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Box>
     </Box>
   );
 };

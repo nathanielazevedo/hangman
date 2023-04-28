@@ -13,6 +13,7 @@ import { Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import LostDialog from "./LostDialog";
+import chalkboard from "./assets/chalkboard.jpeg";
 
 const imagesHash = {
   0: zero,
@@ -62,8 +63,6 @@ function App() {
         setCurrentWord(words[Math.floor(Math.random() * words.length)]);
         setRightLetters(0);
         setGuessed([]);
-        setRemainingAttempts(6);
-        setWrongs(0);
       }
     } else {
       setWrongs((wrongs) => wrongs + 1);
@@ -103,17 +102,33 @@ function App() {
           variant="contained"
           sx={{
             position: "absolute",
-            top: "10px",
-            left: "10px",
+            top: "30px",
+            left: "30px",
             zIndex: "1",
+            fontFamily: "Coming Soon, cursive",
+            fontSize: { xs: "20px", lg: "30px" },
           }}
         >
-          Go Back
+          Home
         </Button>
       </Link>
       <Box sx={styles.score}>
-        <Typography>Score: {score}</Typography>
-        <Typography>Remaining: {wrongs}</Typography>
+        <Typography
+          sx={{
+            fontFamily: "Coming Soon, cursive",
+            fontSize: { xs: "20px", lg: "30px" },
+          }}
+        >
+          Score: {score}
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Coming Soon, cursive",
+            fontSize: { xs: "20px", lg: "30px" },
+          }}
+        >
+          Remaining Guesses: {remainingAttempts}
+        </Typography>
       </Box>
       <Box
         sx={{
@@ -178,6 +193,9 @@ const styles = {
     flexDirection: { xs: "column", lg: "row" },
     alignItems: "center",
     justifyContent: "space-evenly",
+    backgroundImage: `url(${chalkboard})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
   },
   img: {
     position: "absolute",
@@ -198,6 +216,7 @@ const styles = {
     top: "50px",
     right: "50px",
     color: "white",
+    fontFamily: "Coming Soon, cursive",
   },
   letter: {
     borderBottom: "3px solid white",
@@ -206,6 +225,7 @@ const styles = {
     height: "50px",
     display: "flex",
     justifyContent: "center",
+    fontSize: "40px",
     alignItems: "center",
     margin: "5px",
   },
@@ -224,5 +244,6 @@ const styles = {
     color: "white",
     fontSize: "20px",
     cursor: "pointer",
+    fontFamily: "Coming Soon, cursive",
   },
 };

@@ -18,8 +18,22 @@ const LostDialog = ({ open, resetGame, score }) => {
         }}
       >
         <Box>
-          <Typography variant="h4">Great Job!</Typography>
-          <Typography variant="h5">Your Score: {score}</Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Coming Soon, cursive",
+            }}
+          >
+            Great Job!
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "Coming Soon, cursive",
+            }}
+          >
+            Your Score: {score}
+          </Typography>
         </Box>
 
         <Box>
@@ -30,6 +44,7 @@ const LostDialog = ({ open, resetGame, score }) => {
               height: "50px",
               width: "100%",
               marginBottom: "20px",
+              fontFamily: "Coming Soon, cursive",
             }}
           >
             Play Again
@@ -46,6 +61,7 @@ const LostDialog = ({ open, resetGame, score }) => {
               onClick={resetGame}
               sx={{
                 height: "50px",
+                fontFamily: "Coming Soon, cursive",
               }}
             >
               Checkout out our homepage!

@@ -4,24 +4,39 @@ import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react/prop-types
 const LostDialog = ({ open, resetGame, score }) => {
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const addToLeaderboard = async () => {
-    await fetch("https://hangman-back.onrender.com/leaderboard", {
+    if (!name.replace(/\s/g, "").length) {
+      setNameError(true);
+      return;
+    }
+    toast.info("Submitting Score... free servers are slow :)");
+    fetch("https://hangman-back.onrender.com/leaderboard", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name: name, score: score }),
+    }).then((res) => {
+      if (res.status === 200) {
+        toast.success("Score Submitted!");
+        setSubmitted(true);
+      } else {
+        toast.error("Score Failed to Submit :(");
+      }
     });
-    setSubmitted(true);
   };
 
   return (
     <Dialog open={open} fullWidth>
+      <ToastContainer position="bottom-right" theme="dark" />
       <Box
         sx={{
           height: "40vh",
@@ -30,11 +45,27 @@ const LostDialog = ({ open, resetGame, score }) => {
           flexDirection: "column",
           justifyContent: "space-evenly",
           width: "100%",
+          fontFamily: "Coming Soon, cursive",
         }}
       >
         <Box>
-          <Typography variant="h4">Great Job!</Typography>
-          <Typography variant="h5">Your Score: {score}</Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Coming Soon, cursive",
+            }}
+          >
+            Great Job!
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: "Coming Soon, cursive",
+              marginTop: "20px",
+            }}
+          >
+            Your Score: {score}
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -48,11 +79,21 @@ const LostDialog = ({ open, resetGame, score }) => {
             id="outlined-basic"
             label="Name"
             variant="outlined"
+            error={nameError}
+            helperText={nameError ? "Name cannot be empty" : ""}
             value={name}
             sx={{
               width: "65%",
+              fontFamily: "Coming Soon, cursive",
+              "& label": {
+                fontFamily: "Coming Soon, cursive",
+              },
+              "& fieldset": {
+                fontFamily: "Coming Soon, cursive",
+              },
             }}
             onChange={(event) => {
+              setNameError(false);
               setName(event.target.value);
             }}
           >
@@ -65,6 +106,7 @@ const LostDialog = ({ open, resetGame, score }) => {
             sx={{
               maxWidth: "30%",
               height: "55px",
+              fontFamily: "Coming Soon, cursive",
             }}
           >
             {submitted ? <CheckIcon /> : "Submit to Leaderboard"}
@@ -75,6 +117,7 @@ const LostDialog = ({ open, resetGame, score }) => {
           onClick={resetGame}
           sx={{
             height: "50px",
+            fontFamily: "Coming Soon, cursive",
           }}
         >
           Play Again
@@ -91,6 +134,7 @@ const LostDialog = ({ open, resetGame, score }) => {
             onClick={resetGame}
             sx={{
               height: "50px",
+              fontFamily: "Coming Soon, cursive",
             }}
           >
             Back to Home

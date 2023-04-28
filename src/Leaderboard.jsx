@@ -76,9 +76,10 @@ const Leaderboard = () => {
           fontFamily: "Coming Soon, cursive",
           fontSize: "30px",
           maxHeight: "80vh",
-          overFlow: "scroll",
+          overflowY: "scroll",
           width: "60%",
-          paddingTop: "15vh",
+          height: "80vh",
+          marginTop: "10vh",
         }}
       >
         <Typography

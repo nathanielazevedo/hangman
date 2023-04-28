@@ -92,6 +92,11 @@ const Challenge = () => {
             label="Custom Word"
             value={text}
             onChange={(e) => {
+              const hasSpaces = e.target.value.includes(" ");
+              if (hasSpaces) {
+                setError("No spaces allowed!");
+                return;
+              }
               if (e.target.value.length > 20) {
                 setError("Keep it short! Less than 20 characters");
                 return;

@@ -14,6 +14,8 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import LostDialog from "./LostDialog";
 import chalkboard from "./assets/chalkboard.jpeg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const imagesHash = {
   0: zero,
@@ -60,6 +62,7 @@ function App() {
       setScore((score) => score + count);
       setRightLetters((rightLetters) => rightLetters + count);
       if (rightLetters + count === currentWord.length) {
+        toast.success("Great job! Keep Going");
         setCurrentWord(words[Math.floor(Math.random() * words.length)]);
         setRightLetters(0);
         setGuessed([]);
@@ -102,6 +105,7 @@ function App() {
         score={score}
         word={currentWord}
       />
+      <ToastContainer position="bottom-right" theme="dark" />
       <Link to="/">
         <Button
           variant="contained"

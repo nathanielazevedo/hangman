@@ -7,7 +7,6 @@ import three from "./assets/3.svg";
 import four from "./assets/4.svg";
 import five from "./assets/5.svg";
 import six from "./assets/6.svg";
-import paper from "./assets/paper.jpeg";
 import { wordBank } from "./wordBank";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -30,7 +29,7 @@ const alphabet = Array.from(Array(26)).map((_, index) =>
 );
 
 function App() {
-  const { category, difficulty } = useParams();
+  const { category } = useParams();
   const [rightLetters, setRightLetters] = useState(0);
   const words = wordBank[category];
   const [guessed, setGuessed] = useState([]);
@@ -99,7 +98,6 @@ function App() {
   return (
     <Box style={styles.container}>
       <LostDialog open={open} resetGame={resetGame} score={score} />
-      <img src={imagesHash[wrongs]} width="400px" />
       <Link to="/">
         <Button
           variant="contained"
@@ -120,33 +118,50 @@ function App() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: { xs: "column", lg: "row" },
           alignItems: "center",
-          justifyContent: "center",
+          width: "100%",
+          justifyContent: "space-evenly",
         }}
       >
-        <Box sx={styles.inputContainer}>
-          {currentWord.split("").map((letter, i) => {
-            return (
-              <div key={i} style={styles.letter}>
-                {guessed.includes(letter) ? letter : ""}
-              </div>
-            );
-          })}
+        <Box
+          sx={{
+            width: { xs: "200px", lg: "400px" },
+          }}
+        >
+          <img src={imagesHash[wrongs]} width="100%" />
         </Box>
-        <Box style={styles.wordBankContainer}>
-          {alphabet.map((letter, index) => (
-            <Button
-              key={index}
-              sx={styles.button}
-              color={getButtonColor(letter)}
-              variant="contained"
-              // disabled={guessed.includes(letter)}
-              onClick={() => handleGuess(letter)}
-            >
-              {letter}
-            </Button>
-          ))}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Box sx={styles.inputContainer}>
+            {currentWord.split("").map((letter, i) => {
+              return (
+                <div key={i} style={styles.letter}>
+                  {guessed.includes(letter) ? letter : ""}
+                </div>
+              );
+            })}
+          </Box>
+          <Box style={styles.wordBankContainer}>
+            {alphabet.map((letter, index) => (
+              <Button
+                key={index}
+                sx={styles.button}
+                color={getButtonColor(letter)}
+                variant="contained"
+                // disabled={guessed.includes(letter)}
+                onClick={() => handleGuess(letter)}
+              >
+                {letter}
+              </Button>
+            ))}
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -160,7 +175,7 @@ const styles = {
     minWidth: "100vw",
     minHeight: "100vh",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: { xs: "column", lg: "row" },
     alignItems: "center",
     justifyContent: "space-evenly",
   },
@@ -175,6 +190,8 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     gap: "10px",
+    flexWrap: "wrap",
+    width: "500px",
   },
   score: {
     position: "absolute",

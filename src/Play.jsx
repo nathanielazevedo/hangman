@@ -238,7 +238,7 @@ const styles = {
     margin: "5px",
   },
   wordBankContainer: {
-    marginTop: "70px",
+    marginTop: "20px",
     width: { xs: "300px", lg: "500px" },
     maxWidth: { xs: "300px", lg: "500px" },
     display: "flex",

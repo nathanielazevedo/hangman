@@ -21,16 +21,48 @@ const imagesHash = {
 function App() {
   const [guessed, setGuessed] = useState([]);
   const [input, setInput] = useState("");
+  const [currentWord, setCurrentWord] = useState(wordBank[Math.floor(Math.random() * wordBank.length)])
+  const [remainingAttempts, setRemainingAttempts] = useState(6)
   const [wrongs, setWrongs] = useState(0);
   const [helperText, setHelperText] = useState("");
-  const word = "hello";
+  const wordBank = ["hello", "world", "react", "javascript", "hangman"];
+
+  const handleGuess = (letter) => {
+    const newGuessed = [...guessed. letter.toLowerCase()]
+    setGuessed(newGuessed)
+
+    if (currentWord.toLowerCase().includes(letter.toLowerCase())) {
+      if (newGuessed.filter((guess) => currentWord.toLowerCase().includes(guess)).length === currentWord.length) {
+        alert("You win!")
+        resetGame();
+      }
+    } else {
+      setRemainingAttempts(remainingAttempts - 1)
+      if (remainingAttempts === 1) {
+        alert(`You lost! The word was "${currentWord}".`);  
+        resetGame();
+      }
+    }
+  }
+
+  const resetGame = () => {
+    setGuessed([]);
+    setCurrentWord(wordBank[Math.floor(Math.random() * wordBank.length)]);
+    setRemainingAttempts(6);
+  };
 
   return (
     <>
       <div
         className="App"
         style={{
+          maxWidth: "800px",
           marginBottom: "50px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+          margin: "0 auto",
+          alignItems: "center"
         }}
       >
         <h1>Hangman</h1>
@@ -40,8 +72,14 @@ function App() {
           width: "500px",
         }}
       >
+        {currentWord.split('').map((letter, index) => (
+          <span key={index}>
+            {guessed.includes(letter.toLowerCase()) ? letter : '_'}
+          </span>
+        ))}
         <img src={imagesHash[wrongs]} width="200px" />
       </div>
+      <p>Remaining attempts: {remainingAttempts}</p>
       <div
         style={{
           display: "flex",
@@ -49,7 +87,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        {word.split("").map((letter, i) => {
+        {wordBank.split("").map((letter, i) => {
           return (
             <div
               key={i}
@@ -64,6 +102,11 @@ function App() {
                 margin: "5px",
               }}
             >
+              {Array.from(Array(26)).map((_, index) => (
+          <button key={index} disabled={guessed.includes(String.fromCharCode(97 + index))} onClick={() => handleGuess(String.fromCharCode(97 + index))}>
+            {String.fromCharCode(97 + index)}
+          </button>
+        ))}
               <h5
                 style={{
                   color: "white",
@@ -86,7 +129,7 @@ function App() {
           value={input}
           onChange={(evt) => {
             setInput(evt.target.value);
-            if (word.includes(evt.target.value)) {
+            if (wordBank.includes(evt.target.value)) {
               setHelperText("Correct!");
               setGuessed((guessed) => [...guessed, evt.target.value]);
             } else {

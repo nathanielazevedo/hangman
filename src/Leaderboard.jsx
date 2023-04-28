@@ -9,7 +9,9 @@ const Leaderboard = () => {
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      const response = await fetch("http://localhost:3000/leaderboard");
+      const response = await fetch(
+        "https://hangman-back.onrender.com/leaderboard"
+      );
       const data = await response.json();
       setLeaderboard(data);
     };

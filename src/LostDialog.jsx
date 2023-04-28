@@ -10,7 +10,7 @@ const LostDialog = ({ open, resetGame, score }) => {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const addToLeaderboard = async () => {
-    await fetch("http://localhost:3000/leaderboard", {
+    await fetch("https://hangman-back.onrender.com/leaderboard", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

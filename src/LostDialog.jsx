@@ -114,7 +114,12 @@ const LostDialog = ({ open, resetGame, score }) => {
         </Box>
         <Button
           variant="contained"
-          onClick={resetGame}
+          onClick={() => {
+            setName("");
+            setNameError(false);
+            setSubmitted(false);
+            resetGame();
+          }}
           sx={{
             height: "50px",
             fontFamily: "Coming Soon, cursive",

@@ -96,7 +96,12 @@ function App() {
 
   return (
     <Box style={styles.container}>
-      <LostDialog open={open} resetGame={resetGame} score={score} />
+      <LostDialog
+        open={open}
+        resetGame={resetGame}
+        score={score}
+        word={currentWord}
+      />
       <Link to="/">
         <Button
           variant="contained"

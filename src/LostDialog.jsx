@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // eslint-disable-next-line react/prop-types
-const LostDialog = ({ open, resetGame, score }) => {
+const LostDialog = ({ open, resetGame, score, word }) => {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -49,14 +49,38 @@ const LostDialog = ({ open, resetGame, score }) => {
         }}
       >
         <Box>
-          <Typography
-            variant="h4"
+          <Box
             sx={{
-              fontFamily: "Coming Soon, cursive",
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
-            Great Job!
-          </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                fontFamily: "Coming Soon, cursive",
+              }}
+            >
+              Great Job!
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Coming Soon, cursive",
+              }}
+            >
+              The word was:{" "}
+              <Typography
+                sx={{
+                  fontFamily: "Coming Soon, cursive",
+                  display: "inline",
+                  color: "red",
+                  fontSize: "30px",
+                }}
+              >
+                {word}
+              </Typography>
+            </Typography>
+          </Box>
           <Typography
             variant="h5"
             sx={{
@@ -70,9 +94,9 @@ const LostDialog = ({ open, resetGame, score }) => {
         <Box
           sx={{
             width: "100%",
-            display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            display: score > 0 ? "flex" : "none",
           }}
         >
           <TextField

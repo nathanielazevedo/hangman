@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import chalkboard from "./assets/chalkboard.jpeg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Tooltip from "@mui/material/Tooltip";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -75,11 +76,12 @@ const Leaderboard = () => {
           justifyContent: "flex-start",
           fontFamily: "Coming Soon, cursive",
           fontSize: "30px",
-          maxHeight: "80vh",
+          // maxHeight: "80vh",
           overflowY: "scroll",
-          width: "60%",
-          height: "80vh",
-          marginTop: "10vh",
+          width: { xs: "90vw", sm: "80vw", md: "90vw", lg: "90vw" },
+          // height: "80vh",
+          marginTop: "20vh",
+          marginBottom: "10vh",
         }}
       >
         <Typography
@@ -139,7 +141,19 @@ const Leaderboard = () => {
             {leaderboard.map((entry, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{entry.name}</td>
+                <td>
+                  <Tooltip title={entry.name} placement="top">
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontFamily: "Coming Soon, cursive",
+                        fontSize: "35px",
+                      }}
+                    >
+                      {entry.name.slice(0, 10)}
+                    </Typography>
+                  </Tooltip>
+                </td>
                 <td>{entry.score}</td>
               </tr>
             ))}

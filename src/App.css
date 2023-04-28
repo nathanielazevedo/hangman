@@ -6,3 +6,7 @@
   margin: 0;
   font-family: "Coming Soon", cursive;
 }
+
+a {
+  text-decoration: none;
+}

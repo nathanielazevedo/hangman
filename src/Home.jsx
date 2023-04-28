@@ -18,6 +18,7 @@ const Home = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        maxHeight: "100vh",
       }}
     >
       <Box
@@ -27,8 +28,9 @@ const Home = () => {
           justifyContent: "center",
           gap: "20px",
           backgroundColor: "white",
-          padding: "70px",
+          padding: { xs: "70px 25px", sm: "50px", md: "50px", lg: "50px" },
           borderRadius: "10px",
+          width: { xs: "90%", sm: "500px", md: "500px", lg: "500px" },
         }}
       >
         <Typography

@@ -13,6 +13,7 @@ const Challenge = () => {
   const [link, setLink] = useState(window.location.href);
   const [copied, setCopied] = useState(false);
   const url = window.location.href;
+  const [error, setError] = useState(false);
 
   const encrypt = (text) => {
     return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
@@ -50,9 +51,9 @@ const Challenge = () => {
       <Box
         sx={{
           backgroundColor: "white",
-          padding: "50px",
+          padding: { xs: "30px", sm: "50px", md: "50px", lg: "50px" },
           borderRadius: "20px",
-          height: "30vh",
+          marginX: { xs: "10px", sm: "0" },
         }}
       >
         <Typography
@@ -74,9 +75,12 @@ const Challenge = () => {
           }}
         >
           <TextField
+            error={error}
+            helperText={error}
             sx={{
               color: "black",
               width: "80%",
+
               fontFamily: "Coming Soon, cursive",
               "& .MuiInputBase-input": {
                 fontFamily: "Coming Soon, cursive",
@@ -88,6 +92,12 @@ const Challenge = () => {
             label="Custom Word"
             value={text}
             onChange={(e) => {
+              if (e.target.value.length > 20) {
+                setError("Keep it short! Less than 20 characters");
+                return;
+              } else {
+                setError(false);
+              }
               setText(e.target.value);
               setLink(`${url}/${encrypt(e.target.value)}`);
             }}
@@ -120,6 +130,8 @@ const Challenge = () => {
             marginTop: "20px",
             fontStyle: "italic",
             fontFamily: "Coming Soon, cursive",
+            maxWidth: { xs: "80vw", sm: "70vw", md: "60vw", lg: "50vw" },
+            wordWrap: "break-word",
           }}
         >
           {link}

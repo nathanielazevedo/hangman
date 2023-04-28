@@ -146,6 +146,7 @@ function App() {
         <Box
           sx={{
             width: { xs: "200px", lg: "400px" },
+            marginTop: { xs: "100px", lg: "0px" },
           }}
         >
           <img src={imagesHash[wrongs]} width="100%" />
@@ -156,6 +157,7 @@ function App() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            width: { xs: "400px", lg: "400px" },
           }}
         >
           <Box sx={styles.inputContainer}>
@@ -217,8 +219,8 @@ const styles = {
   },
   score: {
     position: "absolute",
-    top: "50px",
-    right: "50px",
+    top: { xs: "20px", lg: "30px" },
+    right: { xs: "20px", lg: "30px" },
     color: "white",
     fontFamily: "Coming Soon, cursive",
   },
@@ -234,19 +236,20 @@ const styles = {
     margin: "5px",
   },
   wordBankContainer: {
-    marginTop: "70px",
-    width: "500px",
+    marginTop: { xs: "20px", lg: "70px" },
+    width: { xs: "300px", lg: "500px" },
+    maxWidth: { xs: "300px", lg: "500px" },
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
   },
   button: {
-    width: "50px",
-    height: "50px",
+    width: { xs: "10px", sm: "30px", lg: "50px" },
+    maxWidth: { xs: "10px", sm: "30px", lg: "50px" },
     margin: "5px",
     color: "white",
-    fontSize: "20px",
+    fontSize: { xs: "10px", sm: "20px", lg: "20px" },
     cursor: "pointer",
     fontFamily: "Coming Soon, cursive",
   },

@@ -13,6 +13,7 @@ const LostDialog = ({ open, resetGame, score, word }) => {
   const [nameError, setNameError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const addToLeaderboard = async () => {
+    if (submitted) return;
     if (!name.replace(/\s/g, "").length) {
       setNameError(true);
       return;
@@ -39,7 +40,7 @@ const LostDialog = ({ open, resetGame, score, word }) => {
       <ToastContainer position="bottom-right" theme="dark" />
       <Box
         sx={{
-          height: "40vh",
+          height: { xs: "80vh", md: "40vh" },
           padding: "20px",
           display: "flex",
           flexDirection: "column",
@@ -130,6 +131,7 @@ const LostDialog = ({ open, resetGame, score, word }) => {
             sx={{
               maxWidth: "30%",
               height: "55px",
+              fontSize: { xs: "10px", md: "10px" },
               fontFamily: "Coming Soon, cursive",
             }}
           >

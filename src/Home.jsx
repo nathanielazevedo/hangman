@@ -3,9 +3,26 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import PlayDialog from "./PlayDialog";
 import chalkboard from "./assets/chalkboard.jpeg";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
+  const warmUpRef = useRef(null);
   const [playDialogOpen, setPlayDialogOpen] = useState(false);
+
+  useEffect(() => {
+    if (warmUpRef.current) return;
+    else {
+      fetch("https://hangman-back.onrender.com/leaderboard").then((res) => {
+        if (res.status === 200) {
+          console.log("warmed up");
+          warmUpRef.current = true;
+        } else {
+          console.log("warm up failed");
+        }
+      });
+    }
+  }, []);
   return (
     <Box
       sx={{

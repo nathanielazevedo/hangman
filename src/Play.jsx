@@ -82,6 +82,7 @@ function App() {
   const resetGame = () => {
     setGuessed([]);
     setRemainingAttempts(6);
+    setRightLetters(0);
     setWrongs(0);
     setOpen(false);
     setScore(0);

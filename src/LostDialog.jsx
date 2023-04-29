@@ -19,7 +19,7 @@ const LostDialog = ({ open, resetGame, score, word }) => {
       return;
     }
     toast.info("Submitting Score... free servers are slow :)");
-    fetch("https://hangman-back.onrender.com/leaderboard", {
+    fetch("https://calm-plum-worm-wrap.cyclic.app/leaderboard", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

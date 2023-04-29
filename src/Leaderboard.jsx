@@ -14,17 +14,20 @@ const Leaderboard = () => {
   useEffect(() => {
     toast.info("Loading Leaderboard, free servers are slow :)");
     const fetchLeaderboard = async () => {
-      fetch("https://hangman-back.onrender.com/leaderboard").then(
-        async (res) => {
-          if (res.status === 200) {
-            toast.success("Leaderboard Loaded!");
-            const data = await res.json();
-            setLeaderboard(data);
-          } else {
-            toast.error("Leaderboard Failed to Load :(");
-          }
+      fetch("https://calm-plum-worm-wrap.cyclic.app/leaderboard", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(async (res) => {
+        if (res.status === 200) {
+          toast.success("Leaderboard Loaded!");
+          const data = await res.json();
+          setLeaderboard(data);
+        } else {
+          toast.error("Leaderboard Failed to Load :(");
         }
-      );
+      });
     };
     fetchLeaderboard();
   }, []);

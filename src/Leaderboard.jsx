@@ -78,10 +78,12 @@ const Leaderboard = () => {
           fontSize: "30px",
           // maxHeight: "80vh",
           overflowY: "scroll",
-          width: { xs: "90vw", sm: "80vw", md: "90vw", lg: "90vw" },
+          width: { xs: "100vw", sm: "100vw", md: "90vw", lg: "50vw" },
           // height: "80vh",
-          marginTop: "20vh",
+          marginTop: "15vh",
           marginBottom: "10vh",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: "40px",
         }}
       >
         <Typography
@@ -107,7 +109,7 @@ const Leaderboard = () => {
                   variant="h6"
                   sx={{
                     fontFamily: "Coming Soon, cursive",
-                    fontSize: "35px",
+                    fontSize: { xs: "25px", sm: "35px" },
                   }}
                 >
                   Rank
@@ -118,7 +120,7 @@ const Leaderboard = () => {
                   variant="h6"
                   sx={{
                     fontFamily: "Coming Soon, cursive",
-                    fontSize: "35px",
+                    fontSize: { xs: "25px", sm: "35px" },
                   }}
                 >
                   Name
@@ -129,7 +131,7 @@ const Leaderboard = () => {
                   variant="h6"
                   sx={{
                     fontFamily: "Coming Soon, cursive",
-                    fontSize: "35px",
+                    fontSize: { xs: "25px", sm: "35px" },
                   }}
                 >
                   Score
@@ -139,22 +141,48 @@ const Leaderboard = () => {
           </thead>
           <tbody>
             {leaderboard.map((entry, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>
+              <tr
+                key={index}
+                style={{
+                  backgroundColor:
+                    index < 3
+                      ? "rgba(50,250,20,0.7)"
+                      : index % 2 === 0
+                      ? "rgba(0,0,0,0.5)"
+                      : "rgba(0,0,0,0.3)",
+                }}
+              >
+                <td
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
+                  {index + 1}
+                </td>
+                <td
+                  style={{
+                    padding: "15px",
+                  }}
+                >
                   <Tooltip title={entry.name} placement="top">
                     <Typography
                       variant="h6"
                       sx={{
                         fontFamily: "Coming Soon, cursive",
-                        fontSize: "35px",
+                        fontSize: { xs: "25px", sm: "35px" },
                       }}
                     >
                       {entry.name.slice(0, 10)}
                     </Typography>
                   </Tooltip>
                 </td>
-                <td>{entry.score}</td>
+                <td
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
+                  {entry.score}
+                </td>
               </tr>
             ))}
           </tbody>
